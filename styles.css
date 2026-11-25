@@ -336,6 +336,7 @@
 [data-theme="dark"] .quick-nav button{border-color:#272b34;background:#14161b;color:#a4acb9}
 [data-theme="dark"] .quick-nav button:hover,[data-theme="dark"] .quick-nav button[aria-current=page]{background:#182140;border-color:#3f5ae0;color:#9cb0ff}
 [data-theme="dark"] .gallery .gallery-card{border-color:rgba(255,255,255,.12)}
+[data-theme="dark"] .gallery .gallery-card.podcast-card{border-width:1.5px;border-color:rgba(255,255,255,.1)}
 [data-theme="dark"] .gallery .gallery-card[data-offset="0"]{box-shadow:0 24px 56px rgba(0,0,0,.62)}
 [data-theme="dark"] .gallery .gallery-card[data-offset="-1"],[data-theme="dark"] .gallery .gallery-card[data-offset="1"]{box-shadow:0 16px 36px rgba(0,0,0,.46)}
 [data-theme="dark"] .gallery .gallery-card[data-offset="-2"],[data-theme="dark"] .gallery .gallery-card[data-offset="2"]{box-shadow:0 12px 26px rgba(0,0,0,.38)}
