@@ -203,7 +203,7 @@
 .gallery{--card-w:clamp(200px,19.5vw,258px);--drag-x:0px;position:relative;display:block;width:100%;height:clamp(410px,56svh,520px);min-height:0;padding:0;overflow:hidden;perspective:1150px;perspective-origin:50% 50%;touch-action:pan-y;scroll-snap-type:none;cursor:grab;user-select:none}
 .gallery.is-dragging{cursor:grabbing}
 .gallery.is-dragging .gallery-card{transition:none!important}
-.gallery .gallery-card,.gallery .gallery-card.active,.gallery .gallery-card:not(.active),.gallery .gallery-card:hover,.gallery .gallery-card:not(.active):hover,.gallery .gallery-card.active:hover{position:absolute;top:50%;left:50%;flex:none;width:var(--card-w);height:clamp(340px,46svh,435px);transform-origin:center center;backface-visibility:hidden;transform:translate(-50%,calc(-50% + var(--ty,0px))) translateX(calc(var(--step,0) * var(--card-w) + var(--drag-x,0px))) translateZ(var(--tz,0px)) rotateY(var(--ry,0deg)) scale(var(--sc,1));transition:transform .44s cubic-bezier(.22,1.12,.36,1),opacity .34s ease,filter .34s ease,box-shadow .34s ease;will-change:transform,opacity}
+.gallery .gallery-card,.gallery .gallery-card.active,.gallery .gallery-card:not(.active),.gallery .gallery-card:hover,.gallery .gallery-card:not(.active):hover,.gallery .gallery-card.active:hover{position:absolute;top:50%;left:50%;flex:none;width:var(--card-w);height:clamp(340px,46svh,435px);transform-origin:center center;backface-visibility:hidden;transform:translate(-50%,calc(-50% + var(--ty,0px))) translateX(calc(var(--step,0) * var(--card-w) + var(--drag-x,0px))) translateZ(var(--tz,0px)) rotateY(var(--ry,0deg)) scale(var(--sc,1));transition:transform .34s cubic-bezier(.22,1.12,.36,1),opacity .28s ease,filter .28s ease,box-shadow .28s ease;will-change:transform,opacity}
 .gallery .gallery-card.podcast-card,.gallery .gallery-card.podcast-card.active,.gallery .gallery-card.podcast-card:not(.active),.gallery .gallery-card.podcast-card:hover,.gallery .gallery-card.podcast-card:not(.active):hover,.gallery .gallery-card.podcast-card.active:hover{width:auto;aspect-ratio:9/19.5}
 .gallery .gallery-card[data-offset="0"]{--step:0;--tz:0px;--ry:0deg;--sc:1;--ty:0px;z-index:5;opacity:1;filter:none;box-shadow:0 22px 48px rgba(20,35,80,.16)}
 .gallery .gallery-card[data-offset="0"]:hover{--ty:-4px}
@@ -378,14 +378,16 @@
 [data-theme="dark"] .mobile-menu a{color:#e5e7eb}
 [data-theme="dark"] .mobile-menu a:hover,[data-theme="dark"] .mobile-menu a:active{background:#1a223d;color:#93a8ff}
 
-/* Periodic subtle pop-and-wiggle cue on For hire. ticket */
+/* Periodic "click me" wiggle cue on For hire. ticket (every 5s) + clickable ticket body */
+.ticket-main{cursor:pointer}
 @keyframes hire-nudge{
-  0%,88%,100%{transform:rotate(-2deg) translateY(0) scale(1)}
-  90.5%{transform:rotate(2.2deg) translateY(-2.5px) scale(1.045)}
-  93%{transform:rotate(-4.2deg) translateY(-1.5px) scale(1.03)}
-  95.5%{transform:rotate(1.4deg) translateY(-1px) scale(1.02)}
-  98%{transform:rotate(-2.6deg) translateY(0) scale(1)}
+  0%,82%,100%{transform:rotate(-2deg) translateY(0) scale(1)}
+  85%{transform:rotate(4deg) translateY(-3px) scale(1.06)}
+  88.5%{transform:rotate(-6deg) translateY(-2px) scale(1.05)}
+  92%{transform:rotate(3.5deg) translateY(-2px) scale(1.04)}
+  95.5%{transform:rotate(-4deg) translateY(-1px) scale(1.02)}
+  98%{transform:rotate(-1deg) translateY(0) scale(1)}
 }
-.intro-panel:not(.is-career) #hire-trigger{animation:hire-nudge 8s cubic-bezier(.36,.07,.19,.97) 4s infinite}
+.intro-panel:not(.is-career) #hire-trigger{animation:hire-nudge 5s cubic-bezier(.36,.07,.19,.97) 2s infinite}
 .intro-panel:not(.is-career) #hire-trigger:hover,.intro-panel:not(.is-career) #hire-trigger:focus-visible{animation:none}
 @media(prefers-reduced-motion:reduce){.intro-panel:not(.is-career) #hire-trigger{animation:none}}

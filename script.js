@@ -95,6 +95,13 @@ cards.forEach((card, index) => {
 jumpButtons.forEach(button => button.addEventListener('click', () => selectProject(Number(button.dataset.jump))));
 jumpButtons[0].setAttribute('aria-current', 'page');
 hireTrigger.addEventListener('click', () => animateHire(!introPanel.classList.contains('is-career')));
+const availabilityTicket = hirePanel.querySelector('.availability-ticket');
+if (availabilityTicket) {
+  availabilityTicket.addEventListener('click', event => {
+    if (event.target.closest('a, button')) return;
+    animateHire(false);
+  });
+}
 function setMobileMenu(open) {
   mobileMenu.hidden = !open;
   mobileMenuToggle.setAttribute('aria-expanded', String(open));
@@ -128,7 +135,7 @@ gallery.addEventListener('wheel', event => {
   event.preventDefault();
   if (isShiftWheel) {
     if (Date.now() < wheelUntil) return;
-    wheelUntil = Date.now() + 190;
+    wheelUntil = Date.now() + 120;
     selectProject(activeIndex + Math.sign(event.deltaY));
     return;
   }
@@ -136,16 +143,16 @@ gallery.addEventListener('wheel', event => {
   wheelResetTimer = setTimeout(() => {
     wheelDeltaX = 0;
     gallery.style.setProperty('--drag-x', '0px');
-  }, 110);
+  }, 90);
   if (Date.now() < wheelUntil) return;
   wheelDeltaX += event.deltaX;
-  const preview = Math.max(-22, Math.min(22, -wheelDeltaX * 0.6));
+  const preview = Math.max(-28, Math.min(28, -wheelDeltaX * 1.1));
   gallery.style.setProperty('--drag-x', `${preview}px`);
-  if (Math.abs(wheelDeltaX) >= 18) {
+  if (Math.abs(wheelDeltaX) >= 10) {
     gallery.style.setProperty('--drag-x', '0px');
     selectProject(activeIndex + Math.sign(wheelDeltaX));
     wheelDeltaX = 0;
-    wheelUntil = Date.now() + 190;
+    wheelUntil = Date.now() + 120;
   }
 }, { passive: false });
 
