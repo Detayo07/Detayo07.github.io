@@ -1,0 +1,32 @@
+# Adetayo Adeboye — AI Engineer
+
+> Portfolio of Adetayo Adeboye, an AI engineer and final-year Computer Science student in Lagos, Nigeria building useful AI products and the systems behind them.
+
+## Profile
+- **Name:** Adetayo Adeboye
+- **Role:** AI Engineer at Cubbes Technology Limited (Sep 2026 – Present; previously AI Engineering Intern, Mar – Aug 2026, promoted after six months)
+- **Location:** Lagos, Nigeria (West Africa Time, UTC+1)
+- **Education:** B.Sc. Computer Science, Lagos State University (2023 – 2027 expected), 3.5+ GPA student
+- **Availability:** Open to jobs, collaborations, and opportunities
+- **Email:** adeboyeadetayo107@gmail.com
+- **GitHub:** https://github.com/Detayo07
+- **LinkedIn:** https://www.linkedin.com/in/adeboyeadetayo/
+- **X:** https://x.com/adeboyeadetayo
+
+## Selected Work
+1. **AI Learning Microservices (Cubbes, 130K+ students served):**
+   - **Flashcards:** Backend microservice (Python, FastAPI, PyMuPDF) turning PDF course pages into structured question, answer, and hint cards with block processing and result reuse.
+   - **Quiz:** Backend microservice (Python, FastAPI, AI) generating multiple-choice practice questions from course material grouped by difficulty.
+   - **Mind Maps:** Backend microservice (Python, FastAPI, AI) extracting topics and relationships from course material into connected maps.
+   - **Audio Podcast:** Backend microservice (Python, ElevenLabs, FFmpeg) generating two-speaker study podcasts from script generation through speech synthesis and audio assembly.
+2. **Cubbes Support:** Full in-house support platform (React, FastAPI, PostgreSQL, RAG) built across five surfaces (full admin platform, student mobile widget, website widget, lecturer platform, executive widget), avoiding a $900 third-party provider charge. Includes the Mo AI RAG agent with seamless human handoff.
+3. **CampusLife:** Interactive 3D Nigerian university simulation in the browser (Next.js, React, TypeScript, Three.js). Live at https://campuslife.cubbes.app/.
+4. **Offline SMS Spam Classifier:** Compact offline ML spam filter (Python, scikit-learn, Kaggle) with data-processing scripts, baseline model, and training notebook.
+5. **Open Source (Stellar & Soroban):** RPC failover for BACKit; attestation consent and compatibility tests for Soroban SAS; escrow testing, event processing, and refund logic across Stellar Bounty Board, Hamplard, and StreamPay.
+
+## Selected Skills
+- **Languages:** Python, TypeScript, JavaScript, SQL, Rust
+- **App development:** FastAPI, React, Next.js, Node.js, NestJS, Express
+- **AI engineering:** Gemini, Claude, Codex, Antigravity, Vertex AI, OpenAI API, RAG, embeddings, prompt caching, LangChain, LangGraph, scikit-learn, ElevenLabs
+- **Data & cloud:** PostgreSQL, pgvector, MySQL, Redis, SQLAlchemy, GCP, Cloud Run, Cloud Tasks, Cloud SQL, Google Cloud Storage, Cloudflare R2, AWS S3
+- **Developer tools:** Docker, FFmpeg, pytest, Vitest, Jest, Git, GitHub
