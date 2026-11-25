@@ -304,22 +304,26 @@
   --ink:#f3f4f6;
   --muted:#98a0ad;
   --line:#23262d;
-  --blue:#5b76ff;
+  --blue:#6b82e6;
   --paper:#0b0c0e;
 }
 [data-theme="dark"] body{background:#0b0c0e;color:#f3f4f6}
 [data-theme="dark"] .intro-panel{background:#111317;border-color:#23262d}
-[data-theme="dark"] .brand-mark{background:#304ded}
+[data-theme="dark"] .brand-mark{background:#2137a6}
 [data-theme="dark"] .theme-toggle{border-color:#2c303a;background:#16181d;color:#e5e7eb}
-[data-theme="dark"] .theme-toggle:hover{border-color:#5b76ff;color:#8ca2ff;background:#1a1d24}
+[data-theme="dark"] .theme-toggle:hover{border-color:#6b82e6;color:#93a6f5;background:#1a1d24}
+[data-theme="dark"] .hire-ticket-button,[data-theme="dark"] .availability.hire-ticket-button{background:#2137a6;box-shadow:0 4px 12px rgba(0,0,0,.45)}
+[data-theme="dark"] .hire-ticket-button:hover,[data-theme="dark"] .hire-ticket-button:focus-visible,[data-theme="dark"] .availability.hire-ticket-button:hover{background:#2a42bd;box-shadow:0 6px 16px rgba(0,0,0,.5)}
 [data-theme="dark"] .hire-ticket-button::before,[data-theme="dark"] .hire-ticket-button::after{background:#111317}
+[data-theme="dark"] .availability-ticket{background:#1d3296}
+[data-theme="dark"] .back-to-top{background:#2137a6;border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 22px rgba(0,0,0,.55)}
 [data-theme="dark"] .impact-line{border-color:#23262d}
-[data-theme="dark"] .impact-line strong{color:#6680ff}
+[data-theme="dark"] .impact-line strong{color:#6b82e6}
 [data-theme="dark"] .impact-line span,[data-theme="dark"] .intro-facts{color:#a7afbc}
-[data-theme="dark"] .intro-facts span{border-left-color:#3a4b8c}
+[data-theme="dark"] .intro-facts span{border-left-color:#35447a}
 [data-theme="dark"] .contact-row a{border-color:#2c303a;background:#16181d;color:#e5e7eb}
-[data-theme="dark"] .contact-row a:first-child{background:#f3f4f6;border-color:#f3f4f6;color:#0b0c0e}
-[data-theme="dark"] .contact-row a:hover{background:#304ded;border-color:#304ded;color:#fff}
+[data-theme="dark"] .contact-row a:first-child{background:#e2e5ec;border-color:#e2e5ec;color:#0e1014}
+[data-theme="dark"] .contact-row a:hover{background:#2137a6;border-color:#2137a6;color:#fff}
 [data-theme="dark"] .ticket-bottom:before,[data-theme="dark"] .ticket-bottom:after{background:#111317}
 [data-theme="dark"] .career-history-row{border-bottom-color:#23262d}
 [data-theme="dark"] .career-history-row span{color:#8c95a3}
