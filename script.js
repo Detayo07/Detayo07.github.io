@@ -94,13 +94,28 @@ cards.forEach((card, index) => {
 });
 jumpButtons.forEach(button => button.addEventListener('click', () => selectProject(Number(button.dataset.jump))));
 jumpButtons[0].setAttribute('aria-current', 'page');
-hireTrigger.addEventListener('click', () => animateHire(!introPanel.classList.contains('is-career')));
+let hireInteracted = false;
+hireTrigger.addEventListener('click', () => {
+  hireInteracted = true;
+  animateHire(!introPanel.classList.contains('is-career'));
+});
 const availabilityTicket = hirePanel.querySelector('.availability-ticket');
 if (availabilityTicket) {
+  availabilityTicket.addEventListener('pointerenter', () => { hireInteracted = true; });
   availabilityTicket.addEventListener('click', event => {
+    hireInteracted = true;
     if (event.target.closest('a, button')) return;
     animateHire(false);
   });
+}
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  setTimeout(() => {
+    if (hireInteracted || introPanel.classList.contains('is-career') || window.scrollY > 180) return;
+    animateHire(true);
+    setTimeout(() => {
+      if (!hireInteracted && introPanel.classList.contains('is-career')) animateHire(false);
+    }, 1250);
+  }, 5000);
 }
 function setMobileMenu(open) {
   mobileMenu.hidden = !open;
