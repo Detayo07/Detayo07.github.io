@@ -20,9 +20,18 @@
   <meta name="twitter:description" content="AI engineer in Lagos building useful AI products and the systems behind them.">
   <meta name="twitter:image" content="https://detayo07.github.io/assets/og-portrait.jpg">
   <title>Adetayo Adeboye</title>
+  <script>
+    (function(){
+      var s=localStorage.getItem('theme');
+      var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme=d?'dark':'light';
+      var m=document.querySelector('meta[name="theme-color"]');
+      if(m)m.content=d?'#0b0c0e':'#f4f6fa';
+    })();
+  </script>
   <link rel="icon" type="image/svg+xml" href="assets/adetayo-mark.svg">
   <link rel="preload" as="image" href="assets/portrait.webp" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -49,7 +58,7 @@
     <aside class="intro-panel">
       <header class="brand-row">
         <a class="brand" href="#page-top" aria-label="Adetayo Adeboye, home"><span class="brand-mark">a.</span><span>Adetayo Adeboye</span></a>
-        <div class="header-actions"><button class="availability hire-ticket-button" id="hire-trigger" type="button" aria-controls="availability" aria-expanded="false">For hire. <span aria-hidden="true">↗</span></button><button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Open section menu" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+        <div class="header-actions"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><svg class="icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/></svg></button><button class="availability hire-ticket-button" id="hire-trigger" type="button" aria-controls="availability" aria-expanded="false">For hire. <span aria-hidden="true">↗</span></button><button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Open section menu" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
       </header>
       <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile sections" hidden><a href="#selected-work">Selected work</a><a href="#skills-activity">Skills &amp; GitHub</a><a href="#contact">Contact</a></nav>
 
@@ -193,6 +202,6 @@
   </footer>
   <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top" hidden>↑</button>
   <script src="contributions-2026.js"></script>
-  <script src="script.js?v=3" defer></script>
+  <script src="script.js?v=4" defer></script>
 </body>
 </html>

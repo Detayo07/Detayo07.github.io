@@ -163,21 +163,55 @@ const skillIcons = {
   Docker: 'docker', FFmpeg: 'ffmpeg', pytest: 'pytest', Vitest: 'vitest', Jest: 'jest',
   Git: 'git', GitHub: 'github'
 };
+const darkInvertIcons = new Set(['rust', 'nextdotjs', 'express', 'openai', 'elevenlabs', 'github']);
+const darkBrightIcons = new Set(['langchain', 'langgraph']);
+const darkBoostIcons = new Set(['postgresql', 'mysql', 'sqlalchemy', 'jest', 'aws']);
 document.querySelectorAll('.skill-group p').forEach(group => {
   const skills = group.textContent.split(' · ');
   group.replaceChildren(...skills.map(skill => {
     const tag = document.createElement('span');
     if (skillIcons[skill]) {
+      const iconName = skillIcons[skill];
       const logo = document.createElement('img');
-      logo.src = `assets/icons/${skillIcons[skill]}.svg?v=3`;
+      logo.src = `assets/icons/${iconName}.svg?v=4`;
       logo.decoding = 'async';
       logo.alt = '';
       logo.loading = 'lazy';
+      if (darkInvertIcons.has(iconName)) logo.className = 'icon-invert-dark';
+      else if (darkBrightIcons.has(iconName)) logo.className = 'icon-bright-dark';
+      else if (darkBoostIcons.has(iconName)) logo.className = 'icon-boost-dark';
       tag.append(logo);
     }
     tag.append(document.createTextNode(skill));
     return tag;
   }));
+});
+
+const themeToggle = document.getElementById('theme-toggle');
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+const darkSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+function applyTheme(theme, persist = false) {
+  const isDark = theme === 'dark';
+  document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
+  if (themeColorMeta) themeColorMeta.content = isDark ? '#0b0c0e' : '#f4f6fa';
+  if (themeToggle) {
+    themeToggle.setAttribute('aria-pressed', String(isDark));
+    themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+  if (persist) {
+    try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch {}
+  }
+}
+applyTheme(document.documentElement.dataset.theme || (darkSchemeQuery.matches ? 'dark' : 'light'));
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(next, true);
+  });
+}
+darkSchemeQuery.addEventListener('change', event => {
+  try { if (localStorage.getItem('theme')) return; } catch {}
+  applyTheme(event.matches ? 'dark' : 'light');
 });
 
 const contributionCalendar = window.contributionData;
