@@ -199,9 +199,11 @@
 /* Gallery clearance, spacing, and footer colophon */
 .quick-nav{padding:17px 0 22px}
 
-/* Circular 3D cylindrical carousel (5 visible cards, tight spacing) */
-.gallery{--card-w:clamp(200px,19.5vw,258px);position:relative;display:block;width:100%;height:clamp(410px,56svh,520px);min-height:0;padding:0;overflow:hidden;perspective:1150px;perspective-origin:50% 50%;touch-action:pan-y;scroll-snap-type:none}
-.gallery .gallery-card,.gallery .gallery-card.active,.gallery .gallery-card:not(.active),.gallery .gallery-card:hover,.gallery .gallery-card:not(.active):hover,.gallery .gallery-card.active:hover{position:absolute;top:50%;left:50%;flex:none;width:var(--card-w);height:clamp(340px,46svh,435px);transform-origin:center center;backface-visibility:hidden;transform:translate(-50%,calc(-50% + var(--ty,0px))) translateX(calc(var(--step,0) * var(--card-w))) translateZ(var(--tz,0px)) rotateY(var(--ry,0deg)) scale(var(--sc,1));transition:transform .48s cubic-bezier(.22,.8,.22,1),opacity .42s ease,filter .42s ease,box-shadow .42s ease;will-change:transform,opacity}
+/* Circular 3D cylindrical carousel (5 visible cards, tight spacing, live drag + spring settle) */
+.gallery{--card-w:clamp(200px,19.5vw,258px);--drag-x:0px;position:relative;display:block;width:100%;height:clamp(410px,56svh,520px);min-height:0;padding:0;overflow:hidden;perspective:1150px;perspective-origin:50% 50%;touch-action:pan-y;scroll-snap-type:none;cursor:grab;user-select:none}
+.gallery.is-dragging{cursor:grabbing}
+.gallery.is-dragging .gallery-card{transition:none!important}
+.gallery .gallery-card,.gallery .gallery-card.active,.gallery .gallery-card:not(.active),.gallery .gallery-card:hover,.gallery .gallery-card:not(.active):hover,.gallery .gallery-card.active:hover{position:absolute;top:50%;left:50%;flex:none;width:var(--card-w);height:clamp(340px,46svh,435px);transform-origin:center center;backface-visibility:hidden;transform:translate(-50%,calc(-50% + var(--ty,0px))) translateX(calc(var(--step,0) * var(--card-w) + var(--drag-x,0px))) translateZ(var(--tz,0px)) rotateY(var(--ry,0deg)) scale(var(--sc,1));transition:transform .44s cubic-bezier(.22,1.12,.36,1),opacity .34s ease,filter .34s ease,box-shadow .34s ease;will-change:transform,opacity}
 .gallery .gallery-card.podcast-card,.gallery .gallery-card.podcast-card.active,.gallery .gallery-card.podcast-card:not(.active),.gallery .gallery-card.podcast-card:hover,.gallery .gallery-card.podcast-card:not(.active):hover,.gallery .gallery-card.podcast-card.active:hover{width:auto;aspect-ratio:9/19.5}
 .gallery .gallery-card[data-offset="0"]{--step:0;--tz:0px;--ry:0deg;--sc:1;--ty:0px;z-index:5;opacity:1;filter:none;box-shadow:0 22px 48px rgba(20,35,80,.16)}
 .gallery .gallery-card[data-offset="0"]:hover{--ty:-4px}

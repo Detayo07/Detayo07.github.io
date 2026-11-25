@@ -16,9 +16,12 @@ let activeIndex = 0;
 let wheelUntil = 0;
 let wheelDeltaX = 0;
 let wheelResetTimer = 0;
-let pointerStartX = 0;
-let pointerStartY = 0;
-let pointerActive = false;
+let dragStartX = 0;
+let dragStartY = 0;
+let dragStartTime = 0;
+let dragAxis = null;
+let dragLastDx = 0;
+let suppressClickUntil = 0;
 
 function setHireOpen(open) {
   introPanel.classList.toggle('is-career', open);
@@ -81,7 +84,13 @@ function selectProject(index) {
 }
 
 cards.forEach((card, index) => {
-  card.addEventListener('click', () => selectProject(index));
+  card.addEventListener('click', event => {
+    if (Date.now() < suppressClickUntil) {
+      event.preventDefault();
+      return;
+    }
+    selectProject(index);
+  });
 });
 jumpButtons.forEach(button => button.addEventListener('click', () => selectProject(Number(button.dataset.jump))));
 jumpButtons[0].setAttribute('aria-current', 'page');
@@ -119,35 +128,76 @@ gallery.addEventListener('wheel', event => {
   event.preventDefault();
   if (isShiftWheel) {
     if (Date.now() < wheelUntil) return;
-    wheelUntil = Date.now() + 260;
+    wheelUntil = Date.now() + 190;
     selectProject(activeIndex + Math.sign(event.deltaY));
     return;
   }
   clearTimeout(wheelResetTimer);
-  wheelResetTimer = setTimeout(() => { wheelDeltaX = 0; }, 140);
+  wheelResetTimer = setTimeout(() => {
+    wheelDeltaX = 0;
+    gallery.style.setProperty('--drag-x', '0px');
+  }, 110);
   if (Date.now() < wheelUntil) return;
   wheelDeltaX += event.deltaX;
-  if (Math.abs(wheelDeltaX) >= 30) {
+  const preview = Math.max(-22, Math.min(22, -wheelDeltaX * 0.6));
+  gallery.style.setProperty('--drag-x', `${preview}px`);
+  if (Math.abs(wheelDeltaX) >= 18) {
+    gallery.style.setProperty('--drag-x', '0px');
     selectProject(activeIndex + Math.sign(wheelDeltaX));
     wheelDeltaX = 0;
-    wheelUntil = Date.now() + 280;
+    wheelUntil = Date.now() + 190;
   }
 }, { passive: false });
-gallery.addEventListener('touchstart', event => {
-  if (event.touches.length !== 1) return;
-  pointerActive = true;
-  pointerStartX = event.touches[0].clientX;
-  pointerStartY = event.touches[0].clientY;
-}, { passive: true });
-gallery.addEventListener('touchend', event => {
-  if (!pointerActive || !event.changedTouches.length) return;
-  pointerActive = false;
-  const dx = event.changedTouches[0].clientX - pointerStartX;
-  const dy = event.changedTouches[0].clientY - pointerStartY;
-  if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-    selectProject(activeIndex + (dx < 0 ? 1 : -1));
+
+gallery.addEventListener('pointerdown', event => {
+  if (event.pointerType === 'mouse' && event.button !== 0) return;
+  dragStartX = event.clientX;
+  dragStartY = event.clientY;
+  dragStartTime = Date.now();
+  dragAxis = null;
+  dragLastDx = 0;
+});
+
+gallery.addEventListener('pointermove', event => {
+  if (!dragStartTime) return;
+  const dx = event.clientX - dragStartX;
+  const dy = event.clientY - dragStartY;
+  if (!dragAxis) {
+    if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+    dragAxis = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y';
+    if (dragAxis === 'x') gallery.classList.add('is-dragging');
   }
-}, { passive: true });
+  if (dragAxis !== 'x') return;
+  dragLastDx = dx;
+  const damped = Math.max(-140, Math.min(140, dx * 0.72));
+  gallery.style.setProperty('--drag-x', `${damped}px`);
+});
+
+function endGalleryDrag() {
+  if (!dragStartTime) return;
+  const wasHorizontal = dragAxis === 'x';
+  const dx = dragLastDx;
+  const elapsed = Math.max(1, Date.now() - dragStartTime);
+  dragStartTime = 0;
+  dragAxis = null;
+  dragLastDx = 0;
+  gallery.classList.remove('is-dragging');
+  gallery.style.setProperty('--drag-x', '0px');
+  if (wasHorizontal) {
+    suppressClickUntil = Date.now() + 160;
+    const velocity = Math.abs(dx) / elapsed;
+    if (Math.abs(dx) > 26 || (velocity > 0.22 && Math.abs(dx) > 10)) {
+      selectProject(activeIndex + (dx < 0 ? 1 : -1));
+    }
+  }
+}
+
+gallery.addEventListener('pointerup', endGalleryDrag);
+gallery.addEventListener('pointercancel', endGalleryDrag);
+gallery.addEventListener('pointerleave', event => {
+  if (event.pointerType === 'mouse') endGalleryDrag();
+});
+gallery.addEventListener('dragstart', event => event.preventDefault());
 positionCircularCards();
 
 const skillIcons = {
